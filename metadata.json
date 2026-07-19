@@ -1,0 +1,6 @@
+{
+  "name": "ERP Page Header Designer",
+  "description": "An interactive playground and previewer for Velzon-inspired Angular 21 ERP page headers, generating clean SCSS, HTML, and TypeScript deliverables.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

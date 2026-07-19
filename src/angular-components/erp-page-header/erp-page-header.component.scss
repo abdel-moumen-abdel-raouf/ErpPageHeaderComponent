@@ -1,0 +1,140 @@
+/* ==========================================================================
+   ERP Page Header Component Styles (Velzon-Inspired v4.4.3)
+   Built purely with CSS Logical Properties & CSS variables (Dark/RTL native)
+   ========================================================================== */
+
+:host {
+  // Theme Variables (Light mode defaults, mapped to Velzon tokens with strict fallbacks)
+  --erp-header-bg: var(--vz-card-bg-custom, var(--vz-body-bg, #ffffff));
+  --erp-header-title-color: var(--vz-heading-color, #495057);
+  --erp-header-border-color: var(--vz-border-color, #e9ebec);
+  --erp-breadcrumb-item-color: var(--vz-text-muted, #878a99);
+  --erp-breadcrumb-item-active-color: var(--vz-primary, #405189);
+  --erp-breadcrumb-separator-color: var(--vz-text-muted, #adb5bd);
+  --erp-header-shadow: var(--vz-box-shadow, 0 1px 2px rgba(56, 65, 74, 0.15));
+
+  display: block;
+  width: 100%;
+}
+
+// Native Dark Mode support triggered by typical parent tags (e.g. [data-layout-mode="dark"])
+:host-context([data-layout-mode="dark"]),
+:host-context([data-theme="dark"]),
+:host-context(.dark) {
+  --erp-header-bg: var(--vz-card-bg-custom, var(--vz-body-bg, #1a1d21));
+  --erp-header-title-color: var(--vz-heading-color, #f3f6f9);
+  --erp-header-border-color: var(--vz-border-color, #2a2f34);
+  --erp-breadcrumb-item-color: var(--vz-text-muted, #878a99);
+  --erp-breadcrumb-item-active-color: var(--vz-primary, #3577f1);
+  --erp-breadcrumb-separator-color: var(--vz-text-muted, #495057);
+  --erp-header-shadow: var(--vz-box-shadow, 0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+// Page Header Container Layout
+.erp-page-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 1rem;
+  padding-block: 1.25rem; // 20px top/bottom
+  padding-inline: 1.5rem; // 24px left/right
+  background-color: var(--erp-header-bg);
+  border-block-end: 1px solid var(--erp-header-border-color);
+  box-shadow: var(--erp-header-shadow);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+
+  @media (min-width: 576px) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+// Left Section: Title & Breadcrumbs
+.erp-page-header-title-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+// Page Title Styling
+.erp-page-header-title {
+  margin: 0;
+  font-size: 1.125rem; // 18px matching Velzon premium header size
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  color: var(--erp-header-title-color);
+  line-height: 1.2;
+  font-family: var(--vz-font-sans-serif, 'Inter', sans-serif);
+}
+
+// Breadcrumbs Navigation
+.erp-page-header-breadcrumb-nav {
+  display: flex;
+  align-items: center;
+}
+
+.erp-page-header-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 0.8125rem; // 13px
+  font-weight: 500;
+}
+
+.erp-page-header-breadcrumb-item {
+  display: flex;
+  align-items: center;
+  color: var(--erp-breadcrumb-item-color);
+
+  a {
+    color: var(--erp-breadcrumb-item-color);
+    text-decoration: none;
+    transition: color 0.15s ease-in-out;
+
+    &:hover {
+      color: var(--erp-breadcrumb-item-active-color);
+    }
+  }
+
+  &.active {
+    color: var(--erp-breadcrumb-item-active-color);
+    font-weight: 600;
+  }
+
+  // Purely logical properties for native RTL direction support
+  & + .erp-page-header-breadcrumb-item {
+    padding-inline-start: 0.5rem;
+
+    &::before {
+      content: "/";
+      display: inline-block;
+      padding-inline-end: 0.5rem;
+      color: var(--erp-breadcrumb-separator-color);
+    }
+  }
+}
+
+// Right Section: Custom ng-content action area
+.erp-page-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  
+  // Clean styles for custom buttons loaded in ng-content slot
+  ::ng-deep {
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+      font-weight: 500;
+      transition: all 0.15s ease-in-out;
+    }
+  }
+}

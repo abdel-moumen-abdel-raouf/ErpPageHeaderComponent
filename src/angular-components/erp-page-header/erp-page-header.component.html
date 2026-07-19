@@ -1,0 +1,31 @@
+<!-- 
+  Velzon-Inspired Page Header (v4.4.3 Component)
+  Fully responsive & RTL compliant HTML Template
+-->
+<div class="erp-page-header" id="erpPageHeaderContainer">
+  <div class="erp-page-header-title-box">
+    <h4 class="erp-page-header-title">{{ title }}</h4>
+    <nav class="erp-page-header-breadcrumb-nav" aria-label="breadcrumb">
+      <ol class="erp-page-header-breadcrumb">
+        <li 
+          *ngFor="let item of breadcrumbs; let last = last" 
+          class="erp-page-header-breadcrumb-item" 
+          [class.active]="last || item.isActive"
+          [attr.aria-current]="(last || item.isActive) ? 'page' : null"
+        >
+          <a *ngIf="!last && !item.isActive && item.url; else staticLabel" [href]="item.url">
+            {{ item.label }}
+          </a>
+          <ng-template #staticLabel>
+            <span>{{ item.label }}</span>
+          </ng-template>
+        </li>
+      </ol>
+    </nav>
+  </div>
+  
+  <div class="erp-page-header-actions">
+    <!-- Action buttons passed in from page template go here Project Content Projection -->
+    <ng-content></ng-content>
+  </div>
+</div>
